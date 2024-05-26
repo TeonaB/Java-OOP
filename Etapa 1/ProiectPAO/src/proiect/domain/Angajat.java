@@ -6,15 +6,15 @@ public class Angajat {
     protected String nume;
     protected String prenume;
     protected int varsta;
-    protected Date data_angajare;
+    protected Date dataAngajare;
     protected int salariu;
     Job job;
 
-    public Angajat(String nume, String prenume, int varsta, Date data_angajare, int salariu, Job job) {
+    public Angajat(String nume, String prenume, int varsta, Date dataAngajare, int salariu, Job job) {
         this.nume = nume;
         this.prenume = prenume;
         this.varsta = varsta;
-        this.data_angajare = data_angajare;
+        this.dataAngajare = dataAngajare;
         this.salariu = salariu;
         this.job = job;
     }
@@ -52,11 +52,11 @@ public class Angajat {
     }
 
     public Date getData_angajare() {
-        return data_angajare;
+        return dataAngajare;
     }
 
-    public void setData_angajare(Date data_angajare) {
-        this.data_angajare = data_angajare;
+    public void setDataAngajare(Date dataAngajare) {
+        this.dataAngajare = dataAngajare;
     }
 
     public int getSalariu() {
@@ -73,7 +73,7 @@ public class Angajat {
                 "nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", varsta=" + varsta +
-                ", data_angajare=" + data_angajare +
+                ", dataAngajare=" + dataAngajare +
                 ", salariu=" + salariu +
                 ", job=" + job.getNume()+
                 "} \n";

@@ -1,7 +1,10 @@
 package proiect;
 
 import proiect.domain.*;
-import proiect.service.AeroportService;
+import proiect.service.AvionService;
+import proiect.service.ClientService;
+import proiect.service.DepartamentService;
+import proiect.service.ZborService;
 
 import java.util.Arrays;
 import java.util.Date;
@@ -9,7 +12,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        AeroportService service = new AeroportService();
+        ZborService serviceZbor = new ZborService();
+        ClientService serviceClient = new ClientService();
+        DepartamentService serviceDepartamente = new DepartamentService();
+        AvionService serviceAvion = new AvionService();
+
         Scanner scanner = new Scanner(System.in);
 
 
@@ -35,9 +42,9 @@ public class Main {
         avioane[4] = new Avion(5, "Embraer E190", 2005, 8, 100);
 
         Departament[] departamente = new Departament[3];
-        departamente[0] = new Departament("Departament Pilotaj", 1000000);
-        departamente[1] = new Departament("Departament HR", 800000);
-        departamente[2] = new Departament("Departament Clienti", 1200000);
+        departamente[0] = new Departament("Pilotaj", 1000000);
+        departamente[1] = new Departament("HR", 800000);
+        departamente[2] = new Departament("Clienti", 1200000);
         departamente[0].addAngajat(angajati[0]);
         departamente[0].addAngajat(angajati[1]);
         departamente[0].addAngajat(angajati[4]);
@@ -73,8 +80,8 @@ public class Main {
 
         Zbor[] finalZboruri = zboruri;
         Arrays.sort(zboruri, (a, b) -> {
-            int a1 = service.simulareplata(finalZboruri, a.getNr_zbor(),1,"economy");
-            int b1 = service.simulareplata(finalZboruri, b.getNr_zbor(),1,"economy");
+            int a1 = serviceClient.simulareplata(finalZboruri, a.getNrZbor(),1,"economy");
+            int b1 = serviceClient.simulareplata(finalZboruri, b.getNrZbor(),1,"economy");
 
             return Integer.compare(b1, a1);
         });
@@ -114,38 +121,38 @@ public class Main {
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
-                    zboruri=service.addZbor(zboruri,avioane);
+                    zboruri=serviceZbor.addZbor(zboruri,avioane);
                     System.out.println(Arrays.toString(zboruri));
                     break;
                 case 2:
-                    clienti=service.addClient(clienti);
+                    clienti=serviceClient.addClient(clienti);
                     System.out.println(Arrays.toString(clienti));
                     break;
                 case 3:
-                    clienti=service.addRezervare(clienti, zboruri);
+                    clienti=serviceClient.addRezervare(clienti, zboruri);
                     System.out.println(Arrays.toString(clienti));
                     break;
                 case 4:
-                    service.showClientRezervare(clienti);
+                    serviceClient.showClientRezervare(clienti);
                     break;
                 case 5:
-                    service.top3Client(clienti);
+                    serviceClient.top3Client(clienti);
                     break;
                 case 6:
-                    int x= service.simulatePay(zboruri);
+                    int x= serviceZbor.simulatePay(zboruri);
                     System.out.println("Pretul simularii este de "+ x);
                     break;
                 case 7:
-                    service.showRezervZbor();
+                    serviceZbor.showRezervZbor(zboruri, clienti);
                     break;
                 case 8:
-                    service.showAvionZbor();
+                    serviceAvion.showAvionZbor(avioane, zboruri);
                     break;
                 case 9:
-                    service.searchZborDestinatie();
+                    serviceZbor.searchZborDestinatie(zboruri);
                     break;
                 case 10:
-                    service.showDepartAngajati();
+                    serviceDepartamente.showDepartAngajati(departamente, sefi);
                     break;
                 case 11:
                     System.exit(0);

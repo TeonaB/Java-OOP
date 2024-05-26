@@ -1,26 +1,26 @@
 package proiect.domain;
 
 public class Avion {
-    private int nr_avion;
+    private int nrAvion;
     private String model;
-    private int an_fabricatie;
-    private int pret_pe_km;
-    private int nr_locuri;
+    private int anFabricatie;
+    private int pretPeKm;
+    private int nrLocuri;
 
-    public Avion(int nr_avion, String model, int an_fabricatie, int pret_pe_km, int nr_locuri) {
-        this.nr_avion = nr_avion;
+    public Avion(int nrAvion, String model, int anFabricatie, int pretPeKm, int nrLocuri) {
+        this.nrAvion = nrAvion;
         this.model = model;
-        this.an_fabricatie = an_fabricatie;
-        this.pret_pe_km = pret_pe_km;
-        this.nr_locuri = nr_locuri;
+        this.anFabricatie = anFabricatie;
+        this.pretPeKm = pretPeKm;
+        this.nrLocuri = nrLocuri;
     }
 
-    public int getNr_avion() {
-        return nr_avion;
+    public int getNrAvion() {
+        return nrAvion;
     }
 
-    public void setNr_avion(int nr_avion) {
-        this.nr_avion = nr_avion;
+    public void setNrAvion(int nrAvion) {
+        this.nrAvion = nrAvion;
     }
 
     public String getModel() {
@@ -31,38 +31,38 @@ public class Avion {
         this.model = model;
     }
 
-    public int getAn_fabricatie() {
-        return an_fabricatie;
+    public int getAnFabricatie() {
+        return anFabricatie;
     }
 
-    public void setAn_fabricatie(int an_fabricatie) {
-        this.an_fabricatie = an_fabricatie;
+    public void setAnFabricatie(int anFabricatie) {
+        this.anFabricatie = anFabricatie;
     }
 
-    public int getPret_pe_km() {
-        return pret_pe_km;
+    public int getPretPeKm() {
+        return pretPeKm;
     }
 
-    public void setPret_pe_km(int pret_pe_km) {
-        this.pret_pe_km = pret_pe_km;
+    public void setPretPeKm(int pretPeKm) {
+        this.pretPeKm = pretPeKm;
     }
 
-    public int getNr_locuri() {
-        return nr_locuri;
+    public int getNrLocuri() {
+        return nrLocuri;
     }
 
-    public void setNr_locuri(int nr_locuri) {
-        this.nr_locuri = nr_locuri;
+    public void setNrLocuri(int nrLocuri) {
+        this.nrLocuri = nrLocuri;
     }
 
     @Override
     public String toString() {
         return "Avion{" +
-                "nr_avion=" + nr_avion +
+                "nrAvion=" + nrAvion +
                 ", model='" + model + '\'' +
-                ", an_fabricatie=" + an_fabricatie +
-                ", pret_pe_km=" + pret_pe_km +
-                ", nr_locuri=" + nr_locuri +
+                ", anFabricatie=" + anFabricatie +
+                ", pretPeKm=" + pretPeKm +
+                ", nrLocuri=" + nrLocuri +
                 "} \n";
     }
 }

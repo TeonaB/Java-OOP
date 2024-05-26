@@ -7,18 +7,18 @@ public class Client {
     protected String prenume;
     protected int varsta;
     protected String email;
-    protected int nr_pasaport;
+    protected int nrPasaport;
     Rezervare[] rezervari;
 
-    public static int nr_clienti=0;
+    public static int nrClienti=0;
 
-    public Client(String nume, String prenume, int varsta, String email, int nr_pasaport) {
+    public Client(String nume, String prenume, int varsta, String email, int nrPasaport) {
         this.nume = nume;
         this.prenume = prenume;
         this.varsta = varsta;
         this.email = email;
-        this.nr_pasaport = nr_pasaport;
-        nr_clienti++;
+        this.nrPasaport = nrPasaport;
+        nrClienti++;
     }
 
     public String getNume() {
@@ -53,12 +53,12 @@ public class Client {
         this.email = email;
     }
 
-    public int getNr_pasaport() {
-        return nr_pasaport;
+    public int getNrPasaport() {
+        return nrPasaport;
     }
 
-    public void setNr_pasaport(int nr_pasaport) {
-        this.nr_pasaport = nr_pasaport;
+    public void setNrPasaport(int nrPasaport) {
+        this.nrPasaport = nrPasaport;
     }
 
     public Rezervare[] getRezervari() {
@@ -76,7 +76,7 @@ public class Client {
                 ", prenume='" + prenume + '\'' +
                 ", varsta=" + varsta +
                 ", email='" + email + '\'' +
-                ", nr_pasaport=" + nr_pasaport +
+                ", nrPasaport=" + nrPasaport +
                 ", rezervari=" + Arrays.toString(rezervari) +
                 "} \n";
     }

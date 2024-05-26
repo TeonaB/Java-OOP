@@ -8,14 +8,14 @@ public class SefDepartament extends Angajat{
     private String[] mesajeDepartament;
     Departament departament;
 
-    public SefDepartament(String nume, String prenume, int varsta, Date data_angajare, int salariu, Job job, int bonus, Departament departament) {
-        super(nume, prenume, varsta, data_angajare, salariu, job);
+    public SefDepartament(String nume, String prenume, int varsta, Date dataAngajare, int salariu, Job job, int bonus, Departament departament) {
+        super(nume, prenume, varsta, dataAngajare, salariu, job);
         this.bonusSalariu = bonus;
         this.departament = departament;
     }
 
     public SefDepartament( Angajat angajat, int bonus, Departament departament){
-        super(angajat.nume, angajat.prenume,angajat.varsta,angajat.data_angajare, angajat.salariu, angajat.job);
+        super(angajat.nume, angajat.prenume,angajat.varsta,angajat.dataAngajare, angajat.salariu, angajat.job);
         this.bonusSalariu = bonus;
         this.departament = departament;
     }
@@ -51,7 +51,7 @@ public class SefDepartament extends Angajat{
                 ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", varsta=" + varsta +
-                ", data_angajare=" + data_angajare +
+                ", dataAngajare=" + dataAngajare +
                 ", salariu=" + salariu + bonusSalariu +
                 ", mesajele pentru departament sunt = " + Arrays.toString(mesajeDepartament)+
                 "} \n";

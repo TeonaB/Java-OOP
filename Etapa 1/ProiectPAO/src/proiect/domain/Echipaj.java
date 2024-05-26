@@ -5,14 +5,14 @@ import java.util.Date;
 
 public class Echipaj {
     private String nume;
-    private String rol_echipaj;
-    private Date data_infiintare;
+    private String rolEchipaj;
+    private Date dataInfiintare;
     Angajat[] angajati;
 
-    public Echipaj(String nume, String rol_echipaj, Date data_infiintare) {
+    public Echipaj(String nume, String rolEchipaj, Date dataInfiintare) {
         this.nume = nume;
-        this.rol_echipaj = rol_echipaj;
-        this.data_infiintare = data_infiintare;
+        this.rolEchipaj = rolEchipaj;
+        this.dataInfiintare = dataInfiintare;
     }
 
     public String getNume() {
@@ -23,20 +23,20 @@ public class Echipaj {
         this.nume = nume;
     }
 
-    public String getRol_echipaj() {
-        return rol_echipaj;
+    public String getRolEchipaj() {
+        return rolEchipaj;
     }
 
-    public void setRol_echipaj(String rol_echipaj) {
-        this.rol_echipaj = rol_echipaj;
+    public void setRolEchipaj(String rolEchipaj) {
+        this.rolEchipaj = rolEchipaj;
     }
 
-    public Date getData_infiintare() {
-        return data_infiintare;
+    public Date getDataInfiintare() {
+        return dataInfiintare;
     }
 
-    public void setData_infiintare(Date data_infiintare) {
-        this.data_infiintare = data_infiintare;
+    public void setDataInfiintare(Date dataInfiintare) {
+        this.dataInfiintare = dataInfiintare;
     }
 
     public Angajat[] getAngajati() {
@@ -62,8 +62,8 @@ public class Echipaj {
     public String toString() {
         return "Echipaj{" +
                 "nume='" + nume + '\'' +
-                ", rol_echipaj='" + rol_echipaj + '\'' +
-                ", data_infiintare=" + data_infiintare +
+                ", rolEchipaj='" + rolEchipaj + '\'' +
+                ", dataInfiintare=" + dataInfiintare +
                 ", angajati=" + Arrays.toString(angajati) +
                 "} \n";
     }

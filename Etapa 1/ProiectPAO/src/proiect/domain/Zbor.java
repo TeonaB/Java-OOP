@@ -4,63 +4,63 @@ import java.util.AbstractCollection;
 import java.util.Date;
 
 public class Zbor {
-    private int nr_zbor;
-    private String aeroport_destinatie;
-    private Date data_zbor;
-    private float ore_zbor;
-    private int distanta_km;
+    private int nrZbor;
+    private String aeroportDestinatie;
+    private Date dataZbor;
+    private float oreZbor;
+    private int distantaKm;
     Avion avion;
 
-    public static int nr_zboruri=0;
+    public static int nrZboruri=0;
 
-    public Zbor(String aeroport_destinatie, Date data_zbor, float ore_zbor, int distanta_km, Avion avion) {
-        this.nr_zbor = nr_zboruri;
-        this.aeroport_destinatie = aeroport_destinatie;
-        this.data_zbor = data_zbor;
-        this.ore_zbor = ore_zbor;
-        this.distanta_km = distanta_km;
+    public Zbor(String aeroportDestinatie, Date dataZbor, float oreZbor, int distantaKm, Avion avion) {
+        this.nrZbor = nrZboruri;
+        this.aeroportDestinatie = aeroportDestinatie;
+        this.dataZbor = dataZbor;
+        this.oreZbor = oreZbor;
+        this.distantaKm = distantaKm;
         this.avion = avion;
-        nr_zboruri++;
+        nrZboruri++;
     }
 
-    public int getNr_zbor() {
-        return nr_zbor;
+    public int getNrZbor() {
+        return nrZbor;
     }
 
-    public void setNr_zbor(int nr_zbor) {
-        this.nr_zbor = nr_zbor;
+    public void setNrZbor(int nrZbor) {
+        this.nrZbor = nrZbor;
     }
 
-    public String getAeroport_destinatie() {
-        return aeroport_destinatie;
+    public String getAeroportDestinatie() {
+        return aeroportDestinatie;
     }
 
-    public void setAeroport_destinatie(String aeroport_destinatie) {
-        this.aeroport_destinatie = aeroport_destinatie;
+    public void setAeroportDestinatie(String aeroportDestinatie) {
+        this.aeroportDestinatie = aeroportDestinatie;
     }
 
-    public Date getData_zbor() {
-        return data_zbor;
+    public Date getDataZbor() {
+        return dataZbor;
     }
 
-    public void setData_zbor(Date data_zbor) {
-        this.data_zbor = data_zbor;
+    public void setDataZbor(Date dataZbor) {
+        this.dataZbor = dataZbor;
     }
 
-    public float getOre_zbor() {
-        return ore_zbor;
+    public float getOreZbor() {
+        return oreZbor;
     }
 
-    public void setOre_zbor(float ore_zbor) {
-        this.ore_zbor = ore_zbor;
+    public void setOreZbor(float oreZbor) {
+        this.oreZbor = oreZbor;
     }
 
-    public int getDistanta_km() {
-        return distanta_km;
+    public int getDistantaKm() {
+        return distantaKm;
     }
 
-    public void setDistanta_km(int distanta_km) {
-        this.distanta_km = distanta_km;
+    public void setDistantaKm(int distantaKm) {
+        this.distantaKm = distantaKm;
     }
 
     public Avion getAvion() {
@@ -74,11 +74,11 @@ public class Zbor {
     @Override
     public String toString() {
         return "Zbor{" +
-                "nr_zbor=" + nr_zbor +
-                ", aeroport_destinatie='" + aeroport_destinatie + '\'' +
-                ", data_zbor=" + data_zbor +
-                ", ore_zbor=" + ore_zbor +
-                ", distanta_km=" + distanta_km +
+                "nrZbor=" + nrZbor +
+                ", aeroportDestinatie='" + aeroportDestinatie + '\'' +
+                ", dataZbor=" + dataZbor +
+                ", oreZbor=" + oreZbor +
+                ", distantaKm=" + distantaKm +
                 ", avion=" + avion +
                 "} \n";
     }

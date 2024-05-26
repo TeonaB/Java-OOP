@@ -1,34 +1,34 @@
 package proiect.domain;
 
 public class Rezervare {
-    private int nr_rezervare;
-    private int nr_pasageri;
+    private int nrRezervare;
+    private int nrPasageri;
     private int pret;
     private String clasa;
     Zbor zbor;
 
-    public Rezervare(int nr_rezervare, int nr_pasageri, int pret, String clasa, Zbor zbor) {
-        this.nr_rezervare = nr_rezervare;
-        this.nr_pasageri = nr_pasageri;
+    public Rezervare(int nrRezervare, int nrPasageri, int pret, String clasa, Zbor zbor) {
+        this.nrRezervare = nrRezervare;
+        this.nrPasageri = nrPasageri;
         this.pret = pret;
         this.clasa = clasa;
         this.zbor = zbor;
     }
 
-    public int getNr_rezervare() {
-        return nr_rezervare;
+    public int getNrRezervare() {
+        return nrRezervare;
     }
 
-    public void setNr_rezervare(int nr_rezervare) {
-        this.nr_rezervare = nr_rezervare;
+    public void setNrRezervare(int nrRezervare) {
+        this.nrRezervare = nrRezervare;
     }
 
-    public int getNr_pasageri() {
-        return nr_pasageri;
+    public int getNrPasageri() {
+        return nrPasageri;
     }
 
-    public void setNr_pasageri(int nr_pasageri) {
-        this.nr_pasageri = nr_pasageri;
+    public void setNrPasageri(int nrPasageri) {
+        this.nrPasageri = nrPasageri;
     }
 
     public int getPret() {
@@ -58,8 +58,8 @@ public class Rezervare {
     @Override
     public String toString() {
         return "Rezervare{" +
-                "nr_rezervare=" + nr_rezervare +
-                ", nr_pasageri=" + nr_pasageri +
+                "nrRezervare=" + nrRezervare +
+                ", nrPasageri=" + nrPasageri +
                 ", pret=" + pret +
                 ", clasa='" + clasa + '\'' +
                 ", zbor=" + zbor +
