@@ -2,7 +2,7 @@ package proiect.domain;
 
 public class Job {
     private String nume;
-    TipContract contract;
+    private String contract;
 
     public String getNume() {
         return nume;
@@ -12,15 +12,15 @@ public class Job {
         this.nume = nume;
     }
 
-    public TipContract getContract() {
+    public String getContract() {
         return contract;
     }
 
-    public void setContract(TipContract contract) {
+    public void setContract(String contract) {
         this.contract = contract;
     }
 
-    public Job(String nume, TipContract contract) {
+    public Job(String nume, String contract) {
         this.nume = nume;
         this.contract = contract;
     }

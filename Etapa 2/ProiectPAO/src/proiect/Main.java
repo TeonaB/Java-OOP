@@ -1,15 +1,72 @@
 package proiect;
 
+import proiect.config.DatabaseConfiguration;
+import proiect.config.SetupData;
 import proiect.domain.*;
+import proiect.repository.AngajatiRepository;
+import proiect.repository.DepartamentRepository;
+import proiect.repository.EchipajRepository;
+import proiect.repository.JobRepository;
 import proiect.service.AvionService;
 import proiect.service.ClientService;
 import proiect.service.DepartamentService;
 import proiect.service.ZborService;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+
+        /* ETAPA 2 */
+
+        SetupData setupData = new SetupData();
+        setupData.createTable();
+        System.out.println("S-a creat baza de date!");
+
+        JobRepository jobRepo = new JobRepository();
+        jobRepo.createJob("pilot","B2B");
+        jobRepo.createJob("pilot2","B2B");
+        System.out.println(jobRepo.getJob(1));
+        jobRepo.deleteJob(2);
+        jobRepo.updateJob(1,"curatenie2","SRL");
+        jobRepo.createJob("curatenie","PFA");
+        jobRepo.getAllJobs();
+
+        DepartamentRepository depRepo = new DepartamentRepository();
+        depRepo.createDep("dep1",2200);
+        depRepo.createDep("dep2",3554);
+        System.out.println(depRepo.getDep(1));
+        depRepo.deleteDep(2);
+        depRepo.updateDep(1,"dep3",1111);
+        depRepo.createDep("dep4",2342);
+        depRepo.getAllDep();
+
+        EchipajRepository echipajRepo = new EchipajRepository();
+        echipajRepo.createEchipaj("aviatie","piloti", java.sql.Date.valueOf("2024-06-15"));
+        echipajRepo.createEchipaj("ajutoare","smurd", java.sql.Date.valueOf("2023-04-07"));
+        System.out.println(echipajRepo.getEchipaj(1));
+        echipajRepo.deleteEchipaj(2);
+        echipajRepo.updateEchipaj(1,"chelneri","servicii", java.sql.Date.valueOf("2022-08-09"));
+        echipajRepo.getAllEchipaj();
+
+        AngajatiRepository angajRepo = new AngajatiRepository();
+        angajRepo.createAngajat("maria","ioana",23, java.sql.Date.valueOf("2022-06-15"), 2300,22,3,1);
+        angajRepo.createAngajat("georgia","teona",11, java.sql.Date.valueOf("2021-06-14"), 5600,23,4,3);
+        angajRepo.createAngajat("tudor","ionel",40, java.sql.Date.valueOf("2020-08-10"), 2300,22,1,4);
+        angajRepo.getAngajat(1);
+        angajRepo.deleteAngaj(2);
+        angajRepo.updateAngaj(1,"maria2","ioana2",33,java.sql.Date.valueOf("2022-06-15"),4500,24,3,3);
+        angajRepo.getAllAngaj();
+
+
+        DatabaseConfiguration.closeDatabaseConnection();
+
+
+
+
+        /* ETAPA 1 */
+
         ZborService serviceZbor = new ZborService();
         ClientService serviceClient = new ClientService();
         DepartamentService serviceDepartamente = new DepartamentService();
@@ -19,11 +76,11 @@ public class Main {
 
 
         Job[] joburi = new Job[5];
-        joburi[0] = new Job("Stewardesa", TipContract.B2B);
-        joburi[1] = new Job("Pilot", TipContract.CIM);
-        joburi[2] = new Job("Pilot secund", TipContract.PFA);
-        joburi[3] = new Job("Angajat HR", TipContract.SRL);
-        joburi[4] = new Job("Relatii clienti", TipContract.CIM);
+        joburi[0] = new Job("Stewardesa", "B2B");
+        joburi[1] = new Job("Pilot", "CIM");
+        joburi[2] = new Job("Pilot secund", "PFA");
+        joburi[3] = new Job("Angajat HR", "SRL");
+        joburi[4] = new Job("Relatii clienti", "CIM");
 
         Angajat[] angajati = new Angajat[5];
         angajati[0] = new Angajat("Popescu", "Ion", 30, new Date(123456789000L), 5000, joburi[1]);
@@ -155,5 +212,6 @@ public class Main {
                     System.exit(0);
             }
         }
+
     }
 }
