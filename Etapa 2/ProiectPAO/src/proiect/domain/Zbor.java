@@ -3,7 +3,7 @@ package proiect.domain;
 import java.util.AbstractCollection;
 import java.util.Date;
 
-public class Zbor {
+public class Zbor implements Comparable<Zbor>{
     private int nrZbor;
     private String aeroportDestinatie;
     private Date dataZbor;
@@ -81,5 +81,10 @@ public class Zbor {
                 ", distantaKm=" + distantaKm +
                 ", avion=" + avion +
                 "} \n";
+    }
+
+    @Override
+    public int compareTo(Zbor o) {
+        return Integer.compare(this.nrZbor, o.nrZbor);
     }
 }

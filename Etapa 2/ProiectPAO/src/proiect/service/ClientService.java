@@ -4,14 +4,11 @@ import proiect.domain.Client;
 import proiect.domain.Rezervare;
 import proiect.domain.Zbor;
 
-import java.util.Arrays;
-import java.util.Objects;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ClientService {
 
-    public Client[] addClient(Client[] clienti)
+    public List<Client> addClient(List<Client> clientiList)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceți numele clientului:");
@@ -31,21 +28,20 @@ public class ClientService {
         int nrPasaport = scanner.nextInt();
 
         Client clientNou = new Client(nume, prenume, varsta, email, nrPasaport);
-        int nr = clienti.length + 1;
-        Client[] newArray = new Client[nr];
-        System.arraycopy(clienti, 0, newArray, 0, clienti.length);
-        newArray[nr - 1] = clientNou;
+        clientiList.add(clientNou);
 
-        Arrays.sort(newArray, (a, b) -> {
-            int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
-            int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
-
-            return Integer.compare(b1, a1);
+        Collections.sort(clientiList, new Comparator<Client>() {
+            @Override
+            public int compare(Client a, Client b) {
+                int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
+                int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
+                return Integer.compare(b1, a1);
+            }
         });
-        return newArray;
+        return clientiList;
     }
 
-    public Client[] addRezervare(Client[] clienti, Zbor[] zboruri)
+    public List<Client> addRezervare(List<Client> clientiList, Set<Zbor> zboruri)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -64,28 +60,30 @@ public class ClientService {
         System.out.println("Introduceți clasa rezervării:");
         String clasa = scanner.nextLine();
 
-        for(Client cl: clienti)
+        for(Client cl: clientiList)
             if(cl.getNrPasaport() == nrClient)
             {
                 for(Zbor zb: zboruri)
                     if(zb.getNrZbor() == nrZbor)
                     {
-                        Rezervare rezervare = new Rezervare(new Random().nextInt(100),nrPasageri,simulareplata(zboruri,zb.getNrZbor(),nrPasageri,clasa),clasa,zboruri[nrZbor]);
+                        Rezervare rezervare = new Rezervare(new Random().nextInt(100),nrPasageri,simulareplata(zboruri,zb.getNrZbor(),nrPasageri,clasa),clasa,zb);
                         cl.addRezervare(rezervare);
-                        Arrays.sort(clienti, (a, b) -> {
-                            int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
-                            int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
-
-                            return Integer.compare(b1, a1);
+                        Collections.sort(clientiList, new Comparator<Client>() {
+                            @Override
+                            public int compare(Client a, Client b) {
+                                int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
+                                int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
+                                return Integer.compare(b1, a1);
+                            }
                         });
-                        return clienti;
+                        return clientiList;
                     }
             }
         System.out.println("Informatii gresite! Incercati din nou!");
-        return clienti;
+        return clientiList;
     }
 
-    public int simulareplata(Zbor[] zboruri, int nrZbor, int nrPasageri, String nrClasa)
+    public int simulareplata(Set<Zbor> zboruri, int nrZbor, int nrPasageri, String nrClasa)
     {
         for(Zbor z:zboruri)
             if(z.getNrZbor() == nrZbor)
@@ -112,7 +110,7 @@ public class ClientService {
 
 
 
-    public void showClientRezervare(Client[] clienti)
+    public void showClientRezervare(List<Client> clientiList)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -120,7 +118,7 @@ public class ClientService {
         int nrPasaport = scanner.nextInt();
         scanner.nextLine();
         boolean ok = true;
-        for( Client cl: clienti)
+        for( Client cl: clientiList)
         {
             if(cl.getNrPasaport() == nrPasaport)
             {
@@ -135,10 +133,10 @@ public class ClientService {
         }
     }
 
-    public void top3Client(Client[] clienti)
+    public void top3Client(List<Client> clientiList)
     {
         int nr=0;
-        for(Client cl:clienti)
+        for(Client cl:clientiList)
         {
             int nrRezervari = (cl.getRezervari() != null) ? cl.getRezervari().length : 0;
             System.out.println("Numarul de rezervari este" + nrRezervari);

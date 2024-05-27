@@ -6,14 +6,11 @@ import proiect.domain.Rezervare;
 import proiect.domain.Zbor;
 
 import java.sql.SQLOutput;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.Arrays;
+import java.util.*;
 
 public class ZborService {
 
-    public Zbor[] addZbor(Zbor[] zboruri, Avion[] avioane)
+    public Set<Zbor> addZbor(Set<Zbor> zboruri, Avion[] avioane)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -37,19 +34,16 @@ public class ZborService {
             if(a.getNrAvion() == nrAvion)
             {
                 Zbor zbor = new Zbor(name,currentDate,ore,dist,a);
-                int nr = zboruri.length + 1;
-                Zbor[] newArray = new Zbor[nr];
-                System.arraycopy(zboruri, 0, newArray, 0, zboruri.length);
-                newArray[nr - 1] = zbor;
+                zboruri.add(zbor);
 
-                return newArray;
+                return zboruri;
             }
 
         System.out.println("Informatii gresite! Incercati din nou!");
         return zboruri;
     }
 
-    public int simulatePay(Zbor[] zboruri)
+    public int simulatePay(Set<Zbor> zboruri)
     {
         Scanner scanner = new Scanner(System.in);
 
@@ -88,7 +82,7 @@ public class ZborService {
         return 0;
     }
 
-    public void showRezervZbor(Zbor[] zboruri, Client[] clienti)
+    public void showRezervZbor(Set<Zbor> zboruri, List<Client> clientiList)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceți numărul zborului pentru a ii vedea rezervarile:");
@@ -101,10 +95,10 @@ public class ZborService {
             if (z.getNrZbor() == nrZbor) {
                 ok = false;
                 boolean ok2 = true;
-                for (Client cl : clienti) {
+                for (Client cl : clientiList) {
                     Rezervare[] rezervari = cl.getRezervari();
                     if (rezervari != null) {
-                        ok = false;
+                        ok2 = false;
                         for (Rezervare rez : rezervari) {
                             if (rez.getZbor().getNrZbor() == nrZbor) {
                                 System.out.println(rez);
@@ -122,7 +116,7 @@ public class ZborService {
             System.out.println("Informatii gresite! Incercati din nou!");
     }
 
-    public void searchZborDestinatie(Zbor[] zboruri)
+    public void searchZborDestinatie(Set<Zbor> zboruri)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceți destinatia zborului:");

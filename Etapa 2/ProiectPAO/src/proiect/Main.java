@@ -6,9 +6,7 @@ import proiect.service.ClientService;
 import proiect.service.DepartamentService;
 import proiect.service.ZborService;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
@@ -66,42 +64,41 @@ public class Main {
         sefi[1] = new SefDepartament(angajati[3], 2500, departamente[1]);
         sefi[2] = new SefDepartament(angajati[4], 3000, departamente[2]);
 
+        List<Client> clientiList = new ArrayList<>();
+        clientiList.add(new Client("ana","vladescu",25,"ana@gmail.com",234));
+        clientiList.add(new Client("maria","georgescu",60,"maria@gmail.com",2356));
+        clientiList.add(new Client("raluca","marinescu",18,"raluca@gmail.com",2378));
 
-        Client[] clienti = new Client[3];
-        clienti[0]= new Client("ana","vladescu",25,"ana@gmail.com",234);
-        clienti[1]= new Client("maria","georgescu",60,"maria@gmail.com",2356);
-        clienti[2]= new Client("raluca","marinescu",18,"raluca@gmail.com",2378);
+
+        Set<Zbor> zborSet = new TreeSet<>();
+        zborSet.add(new Zbor("maldive",new Date(123456789000L),2,200,avioane[2]));
+        zborSet.add(new Zbor("bahamas",new Date(123456789100L),3,400,avioane[3]));
+        zborSet.add(new Zbor("ibiza",new Date(123456789200L),1,100,avioane[1]));
 
 
-        Zbor[] zboruri = new Zbor[3];
-        zboruri[0] = new Zbor("maldive",new Date(123456789000L),2,200,avioane[2]);
-        zboruri[1] = new Zbor("bahamas",new Date(123456789100L),3,400,avioane[3]);
-        zboruri[2] = new Zbor("ibiza",new Date(123456789200L),1,100,avioane[1]);
+        Iterator<Zbor> iterator = zborSet.iterator();
+        Zbor primulZbor = iterator.next();
+        Rezervare rezervare1 = new Rezervare(2, 2, 100, "economy", primulZbor);
+        Rezervare rezervare4 = new Rezervare(4,2,600,"vip",primulZbor);
+        Zbor alDoileaZbor = iterator.next();
+        Rezervare rezervare2 = new Rezervare(2,2,100,"economy",alDoileaZbor);
+        Rezervare rezervare5 = new Rezervare(5,1,300,"economy",alDoileaZbor);
+        Zbor alTreileaZbor = iterator.next();
+        Rezervare rezervare3 = new Rezervare(3,1,200,"economy",alTreileaZbor);
+        clientiList.get(1).addRezervare(rezervare1);
+        clientiList.get(1).addRezervare(rezervare3);
+        clientiList.get(2).addRezervare(rezervare2);
+        clientiList.get(2).addRezervare(rezervare4);
+        clientiList.get(2).addRezervare(rezervare5);
 
-        Zbor[] finalZboruri = zboruri;
-        Arrays.sort(zboruri, (a, b) -> {
-            int a1 = serviceClient.simulareplata(finalZboruri, a.getNrZbor(),1,"economy");
-            int b1 = serviceClient.simulareplata(finalZboruri, b.getNrZbor(),1,"economy");
 
-            return Integer.compare(b1, a1);
-        });
-
-        Rezervare rezervare1 = new Rezervare(1,1,500,"business",zboruri[0]);
-        Rezervare rezervare2 = new Rezervare(2,2,100,"economy",zboruri[1]);
-        Rezervare rezervare3 = new Rezervare(3,1,200,"economy",zboruri[2]);
-        Rezervare rezervare4 = new Rezervare(4,2,600,"vip",zboruri[0]);
-        Rezervare rezervare5 = new Rezervare(5,1,300,"economy",zboruri[1]);
-        clienti[1].addRezervare(rezervare1);
-        clienti[2].addRezervare(rezervare2);
-        clienti[1].addRezervare(rezervare3);
-        clienti[2].addRezervare(rezervare4);
-        clienti[2].addRezervare(rezervare5);
-
-        Arrays.sort(clienti, (a, b) -> {
-            int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
-            int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
-
-            return Integer.compare(a1, b1);
+        Collections.sort(clientiList, new Comparator<Client>() {
+            @Override
+            public int compare(Client a, Client b) {
+                int a1 = (a.getRezervari() != null) ? a.getRezervari().length : 0;
+                int b1 = (b.getRezervari() != null) ? b.getRezervari().length : 0;
+                return Integer.compare(b1, a1);
+            }
         });
 
 
@@ -121,35 +118,35 @@ public class Main {
             int option = scanner.nextInt();
             switch (option) {
                 case 1:
-                    zboruri=serviceZbor.addZbor(zboruri,avioane);
-                    System.out.println(Arrays.toString(zboruri));
+                    zborSet=serviceZbor.addZbor(zborSet,avioane);
+                    System.out.println(zborSet);
                     break;
                 case 2:
-                    clienti=serviceClient.addClient(clienti);
-                    System.out.println(Arrays.toString(clienti));
+                    clientiList=serviceClient.addClient(clientiList);
+                    System.out.println(clientiList);
                     break;
                 case 3:
-                    clienti=serviceClient.addRezervare(clienti, zboruri);
-                    System.out.println(Arrays.toString(clienti));
+                    clientiList=serviceClient.addRezervare(clientiList, zborSet);
+                    System.out.println(clientiList);
                     break;
                 case 4:
-                    serviceClient.showClientRezervare(clienti);
+                    serviceClient.showClientRezervare(clientiList);
                     break;
                 case 5:
-                    serviceClient.top3Client(clienti);
+                    serviceClient.top3Client(clientiList);
                     break;
                 case 6:
-                    int x= serviceZbor.simulatePay(zboruri);
+                    int x= serviceZbor.simulatePay(zborSet);
                     System.out.println("Pretul simularii este de "+ x);
                     break;
                 case 7:
-                    serviceZbor.showRezervZbor(zboruri, clienti);
+                    serviceZbor.showRezervZbor(zborSet, clientiList);
                     break;
                 case 8:
-                    serviceAvion.showAvionZbor(avioane, zboruri);
+                    serviceAvion.showAvionZbor(avioane, zborSet);
                     break;
                 case 9:
-                    serviceZbor.searchZborDestinatie(zboruri);
+                    serviceZbor.searchZborDestinatie(zborSet);
                     break;
                 case 10:
                     serviceDepartamente.showDepartAngajati(departamente, sefi);

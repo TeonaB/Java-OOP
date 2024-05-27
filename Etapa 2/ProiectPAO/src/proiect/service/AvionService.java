@@ -4,10 +4,11 @@ import proiect.domain.Avion;
 import proiect.domain.Zbor;
 
 import java.util.Scanner;
+import java.util.Set;
 
 public class AvionService {
 
-    public void showAvionZbor(Avion[] avioane, Zbor[] zboruri)
+    public void showAvionZbor(Avion[] avioane, Set<Zbor> zboruri)
     {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Introduceți numarul avionului:");
