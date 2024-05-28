@@ -2,6 +2,7 @@ package proiect.repository;
 
 import proiect.config.DatabaseConfiguration;
 import proiect.domain.Job;
+import proiect.service.AuditService;
 
 import java.sql.*;
 
@@ -22,6 +23,7 @@ public class AngajatiRepository {
             statement.setInt(8,echipaj);
             statement.executeUpdate();
             System.out.println("Angajat inserted successfully.");
+            AuditService.logAction("CreateAngajat");
         }
         catch (SQLException e)
         {
@@ -46,7 +48,7 @@ public class AngajatiRepository {
                 System.out.println("Job id:" + resultSet.getInt("job_id"));
                 System.out.println("Departament id:" + resultSet.getInt("departament_id"));
                 System.out.println("Echipaj id:" + resultSet.getInt("echipaj_id"));
-
+                AuditService.logAction("GetAngajat");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -72,7 +74,9 @@ public class AngajatiRepository {
                 System.out.println("Echipaj id:" + resultSet.getInt("echipaj_id"));
 
                 System.out.println();
+
             }
+            AuditService.logAction("GetAllAngajat");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,6 +100,7 @@ public class AngajatiRepository {
             statement.executeUpdate();
 
             System.out.println("Anagajat updated successfully.");
+            AuditService.logAction("UpdateAngajat");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -109,6 +114,7 @@ public class AngajatiRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("Angajat deleted successfully.");
+            AuditService.logAction("DeleteAngajat");
         } catch (SQLException e) {
             e.printStackTrace();
         }

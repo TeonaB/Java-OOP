@@ -2,6 +2,7 @@ package proiect.repository;
 
 import proiect.config.DatabaseConfiguration;
 import proiect.domain.Echipaj;
+import proiect.service.AuditService;
 
 import java.sql.*;
 
@@ -17,6 +18,7 @@ public class EchipajRepository {
             statement.setDate(3, data);
             statement.executeUpdate();
             System.out.println("Echipaj inserted successfully.");
+            AuditService.logAction("CreateEchipaj");
         }
         catch (SQLException e)
         {
@@ -37,6 +39,7 @@ public class EchipajRepository {
                 String rol_echipaj = resultSet.getString("rol_echipaj");
                 Date data = resultSet.getDate("data_infiintare");
                 Echipaj echipaj = new Echipaj(nume, rol_echipaj,data);
+                AuditService.logAction("GetEchipaj");
                 return echipaj;
             }
         } catch (SQLException e) {
@@ -64,6 +67,7 @@ public class EchipajRepository {
 
                 System.out.println();
             }
+            AuditService.logAction("GetAllEchipaj");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -81,6 +85,7 @@ public class EchipajRepository {
             statement.setInt(4,id);
             statement.executeUpdate();
             System.out.println("Echipaj updated successfully.");
+            AuditService.logAction("UpdateEchipaj");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,6 +99,7 @@ public class EchipajRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("Echipaj deleted successfully.");
+            AuditService.logAction("DeleteEchipaj");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -21,6 +21,7 @@ public class AvionService {
             if(a.getNrAvion() == nrAvion)
             {
                 ok = false;
+                AuditService.logAction("ShowAvionZbor");
                 System.out.println("Detalii Avion: " + a);
                 System.out.println("Zborurile asociate acestui avion:");
 

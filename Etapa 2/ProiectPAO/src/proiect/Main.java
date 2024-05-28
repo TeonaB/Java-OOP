@@ -7,10 +7,7 @@ import proiect.repository.AngajatiRepository;
 import proiect.repository.DepartamentRepository;
 import proiect.repository.EchipajRepository;
 import proiect.repository.JobRepository;
-import proiect.service.AvionService;
-import proiect.service.ClientService;
-import proiect.service.DepartamentService;
-import proiect.service.ZborService;
+import proiect.service.*;
 
 import java.sql.SQLException;
 import java.util.*;
@@ -19,7 +16,7 @@ public class Main {
     public static void main(String[] args) throws SQLException {
 
         /* ETAPA 2 */
-
+        AuditService auditService = new AuditService();
         SetupData setupData = new SetupData();
         setupData.createTable();
         System.out.println("S-a creat baza de date!");

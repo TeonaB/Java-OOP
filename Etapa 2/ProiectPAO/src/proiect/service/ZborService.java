@@ -35,6 +35,7 @@ public class ZborService {
             {
                 Zbor zbor = new Zbor(name,currentDate,ore,dist,a);
                 zboruri.add(zbor);
+                AuditService.logAction("AddZbor");
 
                 return zboruri;
             }
@@ -76,6 +77,7 @@ public class ZborService {
                 }
                 else x= 0;
 
+                AuditService.logAction("SimulatePay");
                 return x;
             }
         System.out.println("Informatii gresite! Incercati din nou!");
@@ -94,6 +96,7 @@ public class ZborService {
         {
             if (z.getNrZbor() == nrZbor) {
                 ok = false;
+                AuditService.logAction("ShowRezervZbor");
                 boolean ok2 = true;
                 for (Client cl : clientiList) {
                     Rezervare[] rezervari = cl.getRezervari();
@@ -128,6 +131,7 @@ public class ZborService {
             if(z.getAeroportDestinatie().equals(destinatie)) {
                 System.out.println(z);
                 ok = false;
+                AuditService.logAction("SearchZborDestinatie");
             }
         }
 

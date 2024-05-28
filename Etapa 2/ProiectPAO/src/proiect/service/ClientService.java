@@ -29,6 +29,7 @@ public class ClientService {
 
         Client clientNou = new Client(nume, prenume, varsta, email, nrPasaport);
         clientiList.add(clientNou);
+        AuditService.logAction("AddClient");
 
         Collections.sort(clientiList, new Comparator<Client>() {
             @Override
@@ -68,6 +69,7 @@ public class ClientService {
                     {
                         Rezervare rezervare = new Rezervare(new Random().nextInt(100),nrPasageri,simulareplata(zboruri,zb.getNrZbor(),nrPasageri,clasa),clasa,zb);
                         cl.addRezervare(rezervare);
+                        AuditService.logAction("AddRezervare");
                         Collections.sort(clientiList, new Comparator<Client>() {
                             @Override
                             public int compare(Client a, Client b) {
@@ -123,6 +125,7 @@ public class ClientService {
             if(cl.getNrPasaport() == nrPasaport)
             {
                 ok=false;
+                AuditService.logAction("ShowClientRezervare");
                 Rezervare[] rezervares = cl.getRezervari();
                 System.out.println(Arrays.toString(rezervares));
             }
@@ -136,8 +139,10 @@ public class ClientService {
     public void top3Client(List<Client> clientiList)
     {
         int nr=0;
+        AuditService.logAction("Top3Client");
         for(Client cl:clientiList)
         {
+
             int nrRezervari = (cl.getRezervari() != null) ? cl.getRezervari().length : 0;
             System.out.println("Numarul de rezervari este" + nrRezervari);
             System.out.println(cl);

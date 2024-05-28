@@ -20,6 +20,7 @@ public class DepartamentService {
             if(d.getNume().equals(departament))
             {
                 ok=false;
+                AuditService.logAction("ShowDepartAngajati");
                 System.out.println(d);
                 for(SefDepartament sef:sefi)
                 {

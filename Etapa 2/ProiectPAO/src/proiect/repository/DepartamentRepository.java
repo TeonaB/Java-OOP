@@ -2,6 +2,7 @@ package proiect.repository;
 
 import proiect.config.DatabaseConfiguration;
 import proiect.domain.Departament;
+import proiect.service.AuditService;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -19,6 +20,7 @@ public class DepartamentRepository {
             statement.setInt(2, buget_anual);
             statement.executeUpdate();
             System.out.println("Departament inserted successfully.");
+            AuditService.logAction("CreateDepartament");
         }
         catch (SQLException e)
         {
@@ -37,8 +39,10 @@ public class DepartamentRepository {
             {
                 String nume = resultSet.getString("nume");
                 int buget_anual = resultSet.getInt("buget_anual");
-                Departament job = new Departament(nume, buget_anual);
-                return job;
+                Departament dep = new Departament(nume, buget_anual);
+                AuditService.logAction("GetDepartament");
+                return dep;
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -62,7 +66,9 @@ public class DepartamentRepository {
                 System.out.println("Bugetul anual: " + buget_anual);
 
                 System.out.println();
+
             }
+            AuditService.logAction("GetAllDepartament");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,6 +85,7 @@ public class DepartamentRepository {
             statement.setInt(3,id);
             statement.executeUpdate();
             System.out.println("Departament updated successfully.");
+            AuditService.logAction("UpdateDepartament");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,6 +99,7 @@ public class DepartamentRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("Departament deleted successfully.");
+            AuditService.logAction("DeleteDepartament");
         } catch (SQLException e) {
             e.printStackTrace();
         }

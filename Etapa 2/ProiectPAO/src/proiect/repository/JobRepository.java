@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import proiect.config.DatabaseConfiguration;
 import proiect.domain.Job;
+import proiect.service.AuditService;
 
 public class JobRepository {
 
@@ -19,6 +20,7 @@ public class JobRepository {
             statement.setString(2, tip_contract);
             statement.executeUpdate();
             System.out.println("Job inserted successfully.");
+            AuditService.logAction("CreateJob");
             }
         catch (SQLException e)
         {
@@ -38,6 +40,7 @@ public class JobRepository {
                 String nume = resultSet.getString("nume");
                 String contract = resultSet.getString("tip_contract");
                 Job job = new Job(nume, contract);
+                AuditService.logAction("GetJob");
                 return job;
             }
         } catch (SQLException e) {
@@ -63,6 +66,7 @@ public class JobRepository {
 
                 System.out.println();
             }
+            AuditService.logAction("GetAllJob");
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -79,6 +83,7 @@ public class JobRepository {
             statement.setInt(3,id);
             statement.executeUpdate();
             System.out.println("Job updated successfully.");
+            AuditService.logAction("UpdateJob");
         }catch (SQLException e) {
             e.printStackTrace();
         }
@@ -92,6 +97,7 @@ public class JobRepository {
             statement.setInt(1, id);
             statement.executeUpdate();
             System.out.println("Job deleted successfully.");
+            AuditService.logAction("DeleteJob");
         } catch (SQLException e) {
             e.printStackTrace();
         }
